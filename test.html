@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic Tương Tác: Phân Tích Ma Trận BCG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F2F2;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .quadrant {
+            border: 2px solid #E5E7EB;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .quadrant:hover {
+            background-color: #ffffff;
+        }
+        .quadrant-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .quadrant-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-[#004777] text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider">Phân Tích Danh Mục Sản Phẩm</h1>
+        <p class="mt-4 text-xl md:text-2xl font-light">Ứng Dụng Ma Trận Boston Consulting Group (BCG)</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="intro" class="mb-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-[#004777] mb-4">Ma Trận BCG là gì?</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Ma trận BCG là một công cụ phân tích chiến lược kinh điển, giúp doanh nghiệp đánh giá danh mục sản phẩm của mình dựa trên hai yếu tố chính: <strong>Tốc độ tăng trưởng thị trường</strong> và <strong>Thị phần tương đối</strong>. Bằng cách phân loại sản phẩm vào bốn nhóm chiến lược, doanh nghiệp có thể đưa ra các quyết định đầu tư, duy trì hoặc thoái vốn một cách hiệu quả để tối ưu hóa lợi nhuận và tăng trưởng.
+                </p>
+            </div>
+        </section>
+
+        <section id="quadrants" class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="quadrant bg-yellow-50">
+                    <div class="quadrant-icon">⭐</div>
+                    <h3 class="quadrant-title" style="color: #FF7700;">Ngôi Sao (Star)</h3>
+                    <p>Thị phần cao trong một thị trường tăng trưởng nhanh. Cần đầu tư lớn để duy trì vị thế dẫn đầu và sẽ trở thành Bò Sữa trong tương lai.</p>
+                </div>
+                <div class="quadrant bg-blue-50">
+                    <div class="quadrant-icon">❓</div>
+                    <h3 class="quadrant-title" style="color: #004777;">Dấu Hỏi (Question Mark)</h3>
+                    <p>Thị phần thấp trong một thị trường tăng trưởng nhanh. Tương lai không chắc chắn, cần cân nhắc đầu tư để trở thành Ngôi Sao hoặc thoái vốn.</p>
+                </div>
+                <div class="quadrant bg-green-50">
+                    <div class="quadrant-icon">🐄</div>
+                    <h3 class="quadrant-title" style="color: #008000;">Bò Sữa (Cash Cow)</h3>
+                    <p>Thị phần cao trong một thị trường tăng trưởng chậm. Tạo ra dòng tiền ổn định, là nguồn tài chính chính cho công ty.</p>
+                </div>
+                <div class="quadrant bg-red-50">
+                    <div class="quadrant-icon">🐶</div>
+                    <h3 class="quadrant-title" style="color: #A30000;">Chó (Dog)</h3>
+                    <p>Thị phần thấp trong một thị trường tăng trưởng chậm. Lợi nhuận thấp hoặc không có, nên xem xét thoái vốn để giải phóng nguồn lực.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-study" class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#004777] mb-4">Nghiên Cứu Tình Huống: Phân Tích Danh Mục 6 Sản Phẩm</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Dựa trên dữ liệu được cung cấp, chúng ta sẽ phân tích một danh mục gồm 6 sản phẩm (A, B, C, D, E, F) để xác định vị trí của chúng trên Ma trận BCG và đề xuất chiến lược phù hợp.
+                </p>
+            </div>
+
+            <div class="kpi-card mb-12">
+                <h3 class="text-2xl font-bold text-center mb-6 text-[#004777]">Biểu Đồ Ma Trận BCG</h3>
+                 <p class="text-center text-gray-500 mb-4">Biểu đồ bong bóng trực quan hóa vị trí của từng sản phẩm. Trục X là Thị phần tương đối, Trục Y là Tốc độ tăng trưởng thị trường, và kích thước bong bóng đại diện cho Doanh số.</p>
+                <div class="chart-container">
+                    <canvas id="bcgBubbleChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-[#004777]">So Sánh Thị Phần Tương Đối</h3>
+                    <p class="text-center text-gray-500 mb-4">Thị phần tương đối cho thấy sức mạnh cạnh tranh của sản phẩm so với đối thủ lớn nhất. Giá trị lớn hơn 1.0 cho thấy sản phẩm đang dẫn đầu thị trường.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-[#004777]">So Sánh Tốc Độ Tăng Trưởng</h3>
+                     <p class="text-center text-gray-500 mb-4">Tốc độ tăng trưởng thị trường phản ánh sức hấp dẫn của ngành. Tỷ lệ dương cho thấy thị trường đang mở rộng và ngược lại.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="growthRateChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="data-table" class="mb-16">
+             <div class="kpi-card">
+                <h3 class="text-2xl font-bold text-center mb-6 text-[#004777]">Bảng Dữ Liệu và Kết Quả Phân Tích</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sản phẩm</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Doanh số 2012 (tr. USD)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thị phần tương đối</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tăng trưởng (%)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nhóm BCG</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Chiến lược Đề xuất</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTable" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#004777] text-white text-center p-6 mt-8">
+        <p>&copy; 2025 Infographic được tạo bởi AI. Dữ liệu dựa trên tài liệu được cung cấp.</p>
+    </footer>
+
+    <script>
+        const productData = [
+            { name: 'A', sales2012: 235, competitorSales: 235, sales2011: 230 },
+            { name: 'B', sales2012: 345, competitorSales: 450, sales2011: 360 },
+            { name: 'C', sales2012: 190, competitorSales: 360, sales2011: 210 },
+            { name: 'D', sales2012: 450, competitorSales: 480, sales2011: 480 },
+            { name: 'E', sales2012: 140, competitorSales: 140, sales2011: 120 },
+            { name: 'F', sales2012: 200, competitorSales: 470, sales2011: 270 },
+        ];
+
+        const processedData = productData.map(p => {
+            const relativeMarketShare = p.sales2012 / p.competitorSales;
+            const marketGrowthRate = ((p.sales2012 - p.sales2011) / p.sales2011) * 100;
+            
+            let group = '';
+            let strategy = '';
+            const growthThreshold = 10;
+            const shareThreshold = 1.0;
+
+            if (relativeMarketShare >= shareThreshold && marketGrowthRate >= growthThreshold) {
+                group = 'Ngôi Sao';
+                strategy = 'Đầu tư, phát triển';
+            } else if (relativeMarketShare < shareThreshold && marketGrowthRate >= growthThreshold) {
+                group = 'Dấu Hỏi';
+                strategy = 'Xây dựng hoặc Thoái vốn';
+            } else if (relativeMarketShare >= shareThreshold && marketGrowthRate < growthThreshold) {
+                group = 'Bò Sữa';
+                strategy = 'Thu hoạch, duy trì';
+            } else {
+                group = 'Chó';
+                strategy = 'Thoái vốn, giảm đầu tư';
+            }
+
+            return {
+                ...p,
+                relativeMarketShare,
+                marketGrowthRate,
+                group,
+                strategy
+            };
+        });
+
+        const chartColors = {
+            star: 'rgba(255, 119, 0, 0.7)',
+            question: 'rgba(0, 71, 119, 0.7)',
+            cow: 'rgba(0, 128, 0, 0.7)',
+            dog: 'rgba(163, 0, 0, 0.7)'
+        };
+        
+        const chartBorderColors = {
+            star: 'rgb(255, 119, 0)',
+            question: 'rgb(0, 71, 119)',
+            cow: 'rgb(0, 128, 0)',
+            dog: 'rgb(163, 0, 0)'
+        };
+
+        const getGroupColor = (group) => {
+            switch(group) {
+                case 'Ngôi Sao': return chartColors.star;
+                case 'Dấu Hỏi': return chartColors.question;
+                case 'Bò Sữa': return chartColors.cow;
+                case 'Chó': return chartColors.dog;
+                default: return 'rgba(128, 128, 128, 0.7)';
+            }
+        };
+        
+        const getGroupBorderColor = (group) => {
+            switch(group) {
+                case 'Ngôi Sao': return chartBorderColors.star;
+                case 'Dấu Hỏi': return chartBorderColors.question;
+                case 'Bò Sữa': return chartBorderColors.cow;
+                case 'Chó': return chartBorderColors.dog;
+                default: return 'rgb(128, 128, 128)';
+            }
+        };
+
+        const defaultTooltipConfig = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        window.onload = function() {
+            const tableBody = document.getElementById('resultsTable');
+            processedData.forEach(p => {
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap font-medium">${p.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${p.sales2012.toFixed(2)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${p.relativeMarketShare.toFixed(2)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${p.marketGrowthRate.toFixed(2)}%</td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full" style="background-color: ${getGroupColor(p.group)}; color: white;">${p.group}</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap">${p.strategy}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+
+            const bcgBubbleCtx = document.getElementById('bcgBubbleChart').getContext('2d');
+            new Chart(bcgBubbleCtx, {
+                type: 'bubble',
+                data: {
+                    datasets: processedData.map(p => ({
+                        label: `Sản phẩm ${p.name} (${p.group})`,
+                        data: [{
+                            x: p.relativeMarketShare,
+                            y: p.marketGrowthRate,
+                            r: p.sales2012 / 20 
+                        }],
+                        backgroundColor: getGroupColor(p.group),
+                        borderColor: getGroupBorderColor(p.group),
+                        borderWidth: 2,
+                    }))
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Thị Phần Tương Đối',
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            grid: {
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Tốc Độ Tăng Trưởng Thị Trường (%)',
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            grid: {
+                                drawBorder: false,
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const p = processedData[context.datasetIndex];
+                                    return [
+                                        `Sản phẩm: ${p.name}`,
+                                        `Nhóm: ${p.group}`,
+                                        `Thị phần: ${p.relativeMarketShare.toFixed(2)}`,
+                                        `Tăng trưởng: ${p.marketGrowthRate.toFixed(2)}%`,
+                                        `Doanh số: ${p.sales2012} tr. USD`
+                                    ];
+                                }
+                            }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+            new Chart(marketShareCtx, {
+                type: 'bar',
+                data: {
+                    labels: processedData.map(p => p.name),
+                    datasets: [{
+                        label: 'Thị Phần Tương Đối',
+                        data: processedData.map(p => p.relativeMarketShare),
+                        backgroundColor: processedData.map(p => getGroupColor(p.group)),
+                        borderColor: processedData.map(p => getGroupBorderColor(p.group)),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    ...defaultTooltipConfig,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Giá trị' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            const growthRateCtx = document.getElementById('growthRateChart').getContext('2d');
+            new Chart(growthRateCtx, {
+                type: 'bar',
+                data: {
+                    labels: processedData.map(p => p.name),
+                    datasets: [{
+                        label: 'Tốc Độ Tăng Trưởng Thị Trường (%)',
+                        data: processedData.map(p => p.marketGrowthRate),
+                        backgroundColor: processedData.map(p => getGroupColor(p.group)),
+                        borderColor: processedData.map(p => getGroupBorderColor(p.group)),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    ...defaultTooltipConfig,
+                    scales: {
+                        y: {
+                            title: { display: true, text: 'Tỷ lệ (%)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
